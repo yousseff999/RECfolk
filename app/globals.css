@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scroll across all browsers */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for minimal aesthetic */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Apply the global color theme */
+body {
+  @apply bg-primary text-light font-satoshi;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Links and hover transitions */
+a {
+  @apply text-light transition-colors duration-300;
+}
+a:hover {
+  @apply text-accent;
+}
+
+/* Selection color for consistent theme feel */
+::selection {
+  background: #D72638; /* accent red */
+  color: #F5F5F5; /* light text */
+}
+
+/* Navbar item underline fix */
+.nav-item-wrapper:hover .bg-white {
+  width: 100%;
+}
+
+/* Lenis scroll styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Optional: drag cursor (kept commented for reference)
+.drag-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  opacity: 0;
+}
+*/
