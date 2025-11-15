@@ -171,7 +171,7 @@ const Page3: React.FC = () => {
         >
           {mediaItems.map((item: MediaItem, index: number) => (
             <div key={index} className="flex flex-col">
-              <div className="box w-[25vw] h-[31vw] bg-light rounded-[7px] relative overflow-hidden group flex-shrink-0">
+              <div className="box w-[25vw] h-[31vw] bg-black rounded-[7px] relative overflow-hidden group flex-shrink-0">
                 {item.isVimeo ? (
                   <div className="w-full h-full relative" style={{ paddingTop: "56.25%" }}>
                     <iframe

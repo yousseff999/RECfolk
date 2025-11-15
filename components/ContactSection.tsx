@@ -26,17 +26,25 @@ const ContactSection = () => {
       id="contact"
       className="relative min-h-screen w-full overflow-hidden bg-black text-white font-[Satoshi] uppercase"
     >
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover brightness-50"
-        src="https://studio-size.com/wp-content/uploads/2024/05/Studio-Size-%E2%80%94-Labs02.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      ></video>
+      {/* Background Vimeo Video */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        {/* Same aspect ratio container as Part2 */}
+        <div className="w-full h-full relative">
+          <iframe
+            title="vimeo-player"
+            src="https://player.vimeo.com/video/1089240383?h=7a283e1d4e&autoplay=1&loop=1&muted=1&background=1"
+            className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            allowFullScreen
+          ></iframe>
 
-      {/* Overlay content */}
+          {/* Optional dark overlay (same effect as brightness-50 */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+      </div>
+
+      {/* Content Overlay */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
         <p
           ref={paragraphRef}
@@ -66,14 +74,14 @@ const ContactSection = () => {
       </div>
 
       {/* Bottom Info */}
-      <div className="absolute bottom-6 flex flex-col md:flex-row w-full items-center justify-between px-8 text-gray-400 text-xs md:text-sm font-mono">
+      <div className="absolute bottom-6 flex flex-col md:flex-row w-full items-center justify-between px-8 text-gray-400 text-xs md:text-sm font-mono z-10">
         <div className="hidden md:flex items-center gap-4">
           <div className="border border-gray-500 p-2 rounded-lg">
             🌍
           </div>
           <div className="flex flex-col border border-gray-500 border-l-0 px-3 py-2 rounded-r-lg">
             <p className="font-bold text-gray-300">Working Globally</p>
-            <p>Available Nov ’25</p>
+            <p>Available Now</p>
           </div>
         </div>
 
