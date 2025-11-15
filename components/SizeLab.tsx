@@ -4,7 +4,7 @@ const Page7 = () => {
   return (
     <div className="w-full h-screen relative bg-[#020202] lg:p-14 p-6 font-[Satoshi] overflow-hidden">
       {/* Video container */}
-      <div className="video-content w-full h-full relative overflow-hidden rounded-xl shadow-2xl">
+      <div className="absolute inset-0 w-full h-full object-cover brightness-50">
         <video
           className="object-cover w-full h-full rounded-xl transition-transform duration-700 hover:scale-105"
           muted

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
-import { useRouter } from "next/navigation"; // ✅ added this import
 
 interface NavItemProps {
   children: React.ReactNode;
@@ -11,7 +11,12 @@ interface NavItemProps {
   onClick?: () => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ children, index, menuItem = false, onClick }) => {
+const NavItem: React.FC<NavItemProps> = ({
+  children,
+  index,
+  menuItem = false,
+  onClick,
+}) => {
   const isEven = index % 2 === 0;
   const itemRef = useRef<HTMLDivElement>(null);
   const underlineRef = useRef<HTMLDivElement>(null);
@@ -22,7 +27,12 @@ const NavItem: React.FC<NavItemProps> = ({ children, index, menuItem = false, on
     if (!item || !underline) return;
 
     const handleMouseEnter = () =>
-      gsap.to(underline, { width: "100%", duration: 0.3, ease: "power2.out", backgroundColor: "#E50914" }); 
+      gsap.to(underline, {
+        width: "100%",
+        duration: 0.3,
+        ease: "power2.out",
+        backgroundColor: "#E50914",
+      });
 
     const handleMouseLeave = () =>
       gsap.to(underline, { width: "0%", duration: 0.3, ease: "power2.in" });
@@ -62,13 +72,15 @@ const NavItem: React.FC<NavItemProps> = ({ children, index, menuItem = false, on
 };
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const router = useRouter(); // ✅ router hook for navigation
 
+  // Scroll detection for hiding navbar
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -79,6 +91,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
+  // Animate mobile menu
   useEffect(() => {
     const menuElement = menuRef.current;
     const hamburgerElement = hamburgerRef.current;
@@ -86,18 +99,30 @@ const Navbar: React.FC = () => {
 
     if (isMenuOpen) {
       gsap.to(menuElement, { height: "100%", duration: 0.3, ease: "power2.inOut" });
-      gsap.to(hamburgerElement, { color: "#E50914", duration: 0.4 }); 
+      gsap.to(hamburgerElement, { color: "#E50914", duration: 0.4 });
     } else {
       gsap.to(menuElement, { height: "0%", duration: 0.3, ease: "power2.out" });
-      gsap.to(hamburgerElement, { color: "#F5F5F5", duration: 0.4 }); 
+      gsap.to(hamburgerElement, { color: "#F5F5F5", duration: 0.4 });
     }
   }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // ✅ updated: now it just goes back to the previous page
-  const scrollToSection = () => {
-    router.back();
+  // Scroll or redirect to main page
+  const handleNavClick = (sectionId: string) => {
+    if (pathname === "/") {
+      // On main page → smooth scroll
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const yOffset = -60; // navbar offset
+        const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    } else {
+      // On other page → redirect to main page
+      router.push(`/#${sectionId}`);
+    }
+    setIsMenuOpen(false); // close mobile menu
   };
 
   return (
@@ -109,25 +134,28 @@ const Navbar: React.FC = () => {
       >
         <div className="w-full h-[60px] flex items-center justify-between px-4 md:px-14">
           <div className="logo flex items-end relative">
-            <h1
-              className="text-accent text-2xl md:text-3xl cursor-pointer font-bold"
-              onClick={scrollToSection}
-            >
-              RECfolk
-            </h1>
-            <span className="lg:text-2xl text-[16px] text-[#ff0000] ml-1">
-              ©
-            </span>
-          </div>
+  <h1
+    className="text-2xl md:text-3xl cursor-pointer font-bold flex items-center"
+    onClick={() => handleNavClick("home")}
+  >
+    <span className="text-white">RE</span>
+    <span className="text-[#ff0000]">C</span>
+    <span className="text-white">folk</span>
+  </h1>
+  <span className="lg:text-2xl text-[16px] text-[#ff0000] ml-1">®</span>
+</div>
 
+
+          {/* Desktop menu */}
           <div className="hidden md:flex nav-text text-light items-center justify-between gap-8 font-medium text-[1.2vw]">
-            <NavItem index={0} onClick={scrollToSection}>Home</NavItem>
-            <NavItem index={1} onClick={scrollToSection}>Portfolio</NavItem>
-            <NavItem index={2} onClick={scrollToSection}>Studio</NavItem>
-            <NavItem index={3} onClick={scrollToSection}>Labs</NavItem>
-            <NavItem index={4} onClick={scrollToSection}>Contact</NavItem>
+            <NavItem index={0} onClick={() => handleNavClick("home")}>Home</NavItem>
+            <NavItem index={1} onClick={() => handleNavClick("portfolio")}>Portfolio</NavItem>
+            <NavItem index={2} onClick={() => handleNavClick("studio")}>Studio</NavItem>
+            <NavItem index={3} onClick={() => handleNavClick("labs")}>Labs</NavItem>
+            <NavItem index={4} onClick={() => handleNavClick("contact")}>Contact</NavItem>
           </div>
 
+          {/* Mobile hamburger */}
           <button
             ref={hamburgerRef}
             className="md:hidden text-light text-2xl focus:outline-none z-50 transition-colors duration-300"
@@ -145,11 +173,11 @@ const Navbar: React.FC = () => {
         style={{ height: "0%" }}
       >
         <div className="flex flex-col items-center justify-center h-full space-y-6">
-          <NavItem index={0} menuItem onClick={scrollToSection}>Home</NavItem>
-          <NavItem index={1} menuItem onClick={scrollToSection}>Portfolio</NavItem>
-          <NavItem index={2} menuItem onClick={scrollToSection}>Studio</NavItem>
-          <NavItem index={3} menuItem onClick={scrollToSection}>Labs</NavItem>
-          <NavItem index={4} menuItem onClick={scrollToSection}>Contact</NavItem>
+          <NavItem index={0} menuItem onClick={() => handleNavClick("home")}>Home</NavItem>
+          <NavItem index={1} menuItem onClick={() => handleNavClick("portfolio")}>Portfolio</NavItem>
+          <NavItem index={2} menuItem onClick={() => handleNavClick("studio")}>Studio</NavItem>
+          <NavItem index={3} menuItem onClick={() => handleNavClick("labs")}>Labs</NavItem>
+          <NavItem index={4} menuItem onClick={() => handleNavClick("contact")}>Contact</NavItem>
         </div>
       </div>
     </>

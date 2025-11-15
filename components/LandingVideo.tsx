@@ -72,23 +72,29 @@ const Part2: React.FC = () => {
                    lg:flex sm:hidden items-center justify-center pointer-events-none 
                    text-light shadow-[0_0_30px_rgba(229,9,20,0.6)] border border-accent/70"
       >
-        <h4 className="lg:text-2xl font-bold tracking-wide">RECfolk</h4>
+        <h4 className="lg:text-2xl font-bold tracking-wide">RECfolk®</h4>
       </div>
 
       {/* Video background */}
-      <div className="part2-content relative w-full h-full">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          src="/assets/page1.mp4"
-          className="object-cover w-full h-full brightness-[0.65]"
-        ></video>
+      <div className="part2-content relative w-full overflow-hidden">
+  {/* Responsive container to maintain video aspect ratio */}
+  <div className="w-full relative" style={{ paddingTop: "56.25%" }}>
+    <iframe
+      title="vimeo-player"
+      src="https://player.vimeo.com/video/1089240383?h=7a283e1d4e&autoplay=1&loop=1&muted=1&background=1"
+      className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+      frameBorder="0"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+      allowFullScreen
+    ></iframe>
+  </div>
 
-        {/* Optional overlay gradient for more depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent pointer-events-none"></div>
-      </div>
+  {/* Overlay gradient */}
+  <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent pointer-events-none"></div>
+</div>
+
+
+
     </div>
   );
 };

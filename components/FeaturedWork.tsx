@@ -3,7 +3,6 @@
 import React, { useCallback, useRef, useEffect, useState } from "react";
 import "remixicon/fonts/remixicon.css";
 import Image from "next/image";
-import "swiper/css/bundle";
 import gsap from "gsap";
 import Link from "next/link";
 import { FirstPageImages, MediaItem } from "./utils/FirstPageImages";
@@ -172,43 +171,44 @@ const Page3: React.FC = () => {
         >
           {mediaItems.map((item: MediaItem, index: number) => (
             <div key={index} className="flex flex-col">
-              <div
-                className="box w-[25vw] h-[31vw] bg-light rounded-[7px] relative overflow-hidden group flex-shrink-0"
-                onMouseEnter={() =>
-                  handleVideoMouseEnter(
-                    document.getElementById(`video-${index}`) as HTMLVideoElement
-                  )
-                }
-                onMouseLeave={() =>
-                  handleVideoMouseLeave(
-                    document.getElementById(`video-${index}`) as HTMLVideoElement
-                  )
-                }
-              >
-                <Image
-                  src={item.img}
-                  width={410}
-                  height={100}
-                  alt="image"
-                  className="transition-opacity duration-300 object-cover w-full h-full ease-in-out opacity-100 group-hover:opacity-0"
-                />
-                <video
-                  id={`video-${index}`}
-                  className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
-                  muted
-                  loop
-                  autoPlay
-                  src={item.video}
-                ></video>
+              <div className="box w-[25vw] h-[31vw] bg-light rounded-[7px] relative overflow-hidden group flex-shrink-0">
+                {item.isVimeo ? (
+                  <div className="w-full h-full relative" style={{ paddingTop: "56.25%" }}>
+                    <iframe
+                      title={item.title}
+                      src={`${item.video}&autoplay=1&loop=1&muted=1&background=1`}
+                      className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <Image
+                      src={item.img}
+                      width={410}
+                      height={100}
+                      alt={item.title}
+                      className="transition-opacity duration-300 object-cover w-full h-full ease-in-out opacity-100 group-hover:opacity-0"
+                    />
+                    <video
+                      id={`video-${index}`}
+                      className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+                      muted
+                      loop
+                      autoPlay
+                      src={item.video}
+                      onMouseEnter={(e) => handleVideoMouseEnter(e.currentTarget)}
+                      onMouseLeave={(e) => handleVideoMouseLeave(e.currentTarget)}
+                    />
+                  </>
+                )}
                 <div className="absolute bottom-0 left-0 w-full h-[4px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </div>
               <div className="mt-4">
-                <h3 className="lg:text-2xl text-[15px] font-bold text-light">
-                  {item.title}
-                </h3>
-                <p className="lg:text-lg text-[10px] text-gray-400">
-                  {item.subtitle}
-                </p>
+                <h3 className="lg:text-2xl text-[15px] font-bold text-light">{item.title}</h3>
+                <p className="lg:text-lg text-[10px] text-gray-400">{item.subtitle}</p>
               </div>
             </div>
           ))}

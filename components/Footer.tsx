@@ -116,11 +116,11 @@ const Footer: React.FC = () => {
       {/* Bottom links */}
       <div className="link2 flex lg:mt-14 mt-[35vw] lg:h-5 lg:w-auto relative flex-col lg:flex-row gap-4">
         <h1 className="text-[#ffffff] font-sans hover:text-[#ff0000] transition-all duration-300 ease-in-out hover:scale-105 lg:text-xl text-[10px]">
-          Small is beautiful.
+          
         </h1>
 
         <div className="flex justify-end w-full lg:text-xs text-[7px] items-center font-sans lg:gap-10 gap-2 mt-2 lg:mt-0">
-          {["Index", "About", "Blog", "Privacy Policy", "© RECfolk—All rights reserved."].map((item, idx) => (
+          {["© RECfolk—All rights reserved."].map((item, idx) => (
             <h1
               key={idx}
               className="text-[#ffffff] hover:cursor-pointer hover:text-[#ff0000] transition-all duration-300 ease-in-out hover:scale-105"
@@ -133,11 +133,14 @@ const Footer: React.FC = () => {
 
       {/* Large RECfolk text */}
       <div className="flex items-center justify-center w-full lg:mt-0 mt-6 relative">
-        <h1 className="text-[#ffffff] lg:text-[18vw] text-[10vw] font-sans font-bold leading-none relative">
-          RECfolk
-          <span className="lg:text-2xl text-[16px] absolute lg:right-14 lg:bottom-10 bottom-0 right-0 text-[#ff0000]">©</span>
-        </h1>
-      </div>
+  <h1 className="text-[#ffffff] lg:text-[10vw] text-[10vw] font-sans font-bold leading-none relative flex">
+    <span className="text-white">RE</span>
+    <span className="text-[#ff0000]">C</span>
+    <span className="text-white">folk</span>
+    <span className="lg:text-2xl text-[16px] absolute lg:right-14 lg:bottom-10 bottom-0 right-0 text-[#ff0000]">®</span>
+  </h1>
+</div>
+
     </div>
   );
 };

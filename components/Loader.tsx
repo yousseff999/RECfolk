@@ -19,19 +19,21 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
     if (titleRef.current && loaderRef.current) {
       const letters = titleRef.current.textContent?.split('') || [];
       titleRef.current.innerHTML = '';
+      letterRefs.current = [];
 
       letters.forEach((letter, i) => {
         const span = document.createElement('span');
         span.textContent = letter;
         span.style.display = 'inline-block';
         span.style.opacity = '0';
-        span.style.color = '#ffffff';
+        // Color the "C" red (index 2 in "RECfolk®"), rest white
+        span.style.color = i === 2 ? '#ff0000' : '#ffffff';
         span.style.fontWeight = 'bold';
         letterRefs.current.push(span);
         titleRef.current?.appendChild(span);
       });
 
-      // Initial fade in
+      // Initial fade in of loader
       tl.fromTo(
         loaderRef.current,
         { opacity: 0 },
@@ -51,7 +53,7 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
       // Hold the logo for a bit
       tl.to({}, { duration: 2 });
 
-      // Add a soft pulse
+      // Soft pulse
       tl.to(letterRefs.current, {
         scale: 1.1,
         duration: 1,
@@ -60,7 +62,7 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
         repeat: 1,
       });
 
-      // Exit animation (fade out + slide up)
+      // Exit animation
       exitTl
         .to(letterRefs.current, {
           opacity: 0,
@@ -100,7 +102,7 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
         ref={titleRef}
         className="text-[8vw] font-bold tracking-tight leading-none"
       >
-        RECfolk
+        RECfolk®
       </h1>
     </div>
   );

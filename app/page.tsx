@@ -45,9 +45,9 @@ const Home: React.FC = () => {
         </section>
 
         {/* Labs Section */}
-   {/*     <section id="labs" className="scroll-mt-20">
+        <section id="labs" className="scroll-mt-20">
           <Page7 />
-        </section>    */}
+        </section>    
 
         {/* Contact Section */}
         <section id="contact" className="scroll-mt-20">
