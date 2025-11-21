@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface SocialLinkProps {
   name: string;
@@ -125,12 +126,15 @@ const Footer: React.FC = () => {
 
       {/* Large RECfolk text */}
       <div className="flex items-center justify-center w-full mt-0 relative">
-        <h1 className="text-white lg:text-[7vw] text-[9vw] font-sans font-bold leading-none relative flex">
-          <span>RE</span>
-          <span className="text-[#ff0000]">C</span>
-          <span>folk</span>
-          <span className="lg:text-sm text-[10px] absolute lg:right-4 lg:bottom-2 bottom-0 right-0 text-[#ff0000]">®</span>
-        </h1>
+        <div className="relative w-auto h-auto">
+  <Image
+    src="/assets/Asset1.png" // replace with your image path
+    alt="RE C folk Logo"
+    width={400} // adjust width
+    height={280} // adjust height
+    className="object-contain"
+  />
+</div>
       </div>
 
     </div>

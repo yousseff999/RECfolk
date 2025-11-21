@@ -10,11 +10,6 @@ const services = [
       "https://player.vimeo.com/progressive_redirect/playback/939539456/rendition/720p/file.mp4?loc=external&log_user=0&signature=6d7223a64fad4c23b82a2e42d63d29893a2c20d8bccf2bcdc383a76ab3a4b9b7",
   },
   {
-    name: "Brand Strategy",
-    video:
-      "https://player.vimeo.com/progressive_redirect/playback/939539477/rendition/720p/file.mp4?loc=external&log_user=0&signature=a9bcd4f5ab7da757f1f08e0c62b83ef33408d6880d2cd93822fa1e58ef0252e7",
-  },
-  {
     name: "Motion graphics",
     video:
       "https://player.vimeo.com/progressive_redirect/playback/939539288/rendition/720p/file.mp4?loc=external&log_user=0&signature=9c6d276f268c1a4e21bf58c420eb7514fb42dcab1fbb04dadbb7190bd01e18eb",
@@ -35,24 +30,9 @@ const services = [
       "https://player.vimeo.com/progressive_redirect/playback/939539397/rendition/720p/file.mp4?loc=external&log_user=0&signature=e0ad052ea0b4411dae45853620b37a24f27d88bf05689f71c98997315a12fc5b",
   },
   {
-    name: "Web design",
-    video:
-      "https://player.vimeo.com/progressive_redirect/playback/939539347/rendition/720p/file.mp4?loc=external&log_user=0&signature=90681da5b1a27a6da15503447cdc83a23477fe0412576ce9c841ddb384f492d3",
-  },
-  {
     name: "Photography",
     video:
       "https://player.vimeo.com/progressive_redirect/playback/939539383/rendition/720p/file.mp4?loc=external&log_user=0&signature=205cf375bf7b07cd37bd81fe76c1e85c584abf8120e2a9804a4764adf39a3757",
-  },
-  {
-    name: "Naming",
-    video:
-      "https://player.vimeo.com/progressive_redirect/playback/939539424/rendition/720p/file.mp4?loc=external&log_user=0&signature=86f3447577f806380c3baf67af5f2a62d209ad17f223c7efca585560d4b8f2e0",
-  },
-  {
-    name: "Packaging",
-    video:
-      "https://player.vimeo.com/progressive_redirect/playback/939539313/rendition/720p/file.mp4?loc=external&log_user=0&signature=f9f78670ebe80a6906656f32973752d9e780781dafdb305b843dd83c4a2cc63e",
   },
   {
     name: "Advertising",

@@ -50,16 +50,15 @@ const ContactSection = () => {
           ref={paragraphRef}
           className="text-gray-300 text-base lg:text-lg max-w-[30ch] mb-6 font-mono"
         >
-          Your design is a masterpiece waiting to become alive.
+          
         </p>
 
         <h1
-          ref={titleRef}
-          className="text-[8vw] md:text-[5vw] font-bold text-white leading-tight"
-        >
-          Let’s Make It Happen
-        </h1>
-
+  ref={titleRef}
+  className="text-[8vw] md:text-[5vw] font-syne font-bold text-white leading-tight"
+>
+  Let’s Make It Happen
+</h1>
         {/* Contact Button */}
         <div className="mt-10 flex justify-center items-center">
           <a

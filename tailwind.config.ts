@@ -18,6 +18,8 @@ const config: Config = {
       fontFamily: {
         satoshi: ["Satoshi", "sans-serif"], // your base font
         inter: ["Inter", "sans-serif"], // alternative for body text
+        syne: ["Syne", "sans-serif"],
+         montserrat: ["Montserrat", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

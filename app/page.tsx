@@ -39,10 +39,10 @@ const Home: React.FC = () => {
         </section>
 
         {/* Studio Section */}
-        <section id="studio" className="scroll-mt-20">
+        {/*<section id="studio" className="scroll-mt-20">
           <Page5 />
           <Page6 />
-        </section>
+        </section>*/}
 
         {/* Labs Section */}
        {/* <section id="labs" className="scroll-mt-20">

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 interface NavItemProps {
   children: React.ReactNode;
@@ -133,17 +134,22 @@ const Navbar: React.FC = () => {
         ${prevScrollPos > 0 ? "bg-secondary/70 backdrop-blur-sm" : "bg-transparent"}`}
       >
         <div className="w-full h-[60px] flex items-center justify-between px-4 md:px-14">
-          <div className="logo flex items-end relative">
+         <div className="logo flex items-end relative">
   <h1
-    className="text-2xl md:text-3xl cursor-pointer font-bold flex items-center"
+    className="cursor-pointer flex items-center"
     onClick={() => handleNavClick("home")}
   >
-    <span className="text-white">RE</span>
-    <span className="text-[#ff0000]">C</span>
-    <span className="text-white">folk</span>
+    <Image
+      src="/assets/asset1.png" // replace with your image path
+      alt="RECfolk Logo"
+      width={120}  // adjust width
+      height={40}  // adjust height
+      className="object-contain"
+    />
   </h1>
-  <span className="lg:text-2xl text-[16px] text-[#ff0000] ml-1">®</span>
+  
 </div>
+
 
 
           {/* Desktop menu */}

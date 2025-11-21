@@ -1,76 +1,72 @@
-'use client';
+"use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
 
-gsap.registerPlugin(ScrollTrigger);
+const IMAGES = [
+  { src: "/assets/Asset1.png", alt: "Sport" },
+  { src: "/assets/Asset1.png", alt: "Sahara" },
+  { src: "/assets/Asset1.png", alt: "Divote" },
+];
 
-const Page4 = () => {
+export default function Backto() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const text = document.querySelector(".text-content-2");
+    const track = trackRef.current;
+    if (!track) return;
 
-    gsap.fromTo(
-      text,
-      { y: "135%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: text,
-          start: "top bottom",
-          end: "top 30%",
-          scrub: 2,
-        },
-      }
-    );
+    // Duplicate images for seamless loop
+    const items = Array.from(track.children);
+    items.forEach((item) => track.appendChild(item.cloneNode(true)));
+
+    const totalWidth = Array.from(track.children).reduce((acc, el: any) => {
+      const style = getComputedStyle(el);
+      return acc + el.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    }, 0) / 2; // half because we duplicated
+
+    // Animate
+    gsap.to(track, {
+      x: -totalWidth,
+      duration: 6,
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize((x) => parseFloat(x) % totalWidth),
+      },
+    });
   }, []);
 
   return (
-    <div className="main bg-primary w-full lg:h-[58vw] h-[75vw] lg:p-14 p-4 font-[Satoshi]">
-      {/* Headline */}
-      <div className="text-content-2 flex w-full">
-        <h1 className="text-light lg:text-[5.4vw] text-[4.5vw] font-bold leading-none tracking-tight">
-          Back to the <span className="text-accent">simple</span>, <br />
-          intuitive, and inspiring
-        </h1>
-      </div>
+    <div className="main bg-primary w-full lg:h-[58vw] h-[75vw] lg:p-14 p-4 font-[Satoshi] flex flex-col">
+      <div className="text-content-2 flex w-full mb-10">
+  <h1 className="text-light lg:text-[5.4vw] text-[4.5vw] font-syne font-bold leading-none tracking-tight">
+    Back to the <span className="text-accent">simple</span>, <br />
+    intuitive, and inspiring
+  </h1>
+</div>
 
-      {/* Content Section */}
-      <div className="content flex flex-col lg:flex-row lg:p-10 p-0 lg:h-[40vw] h-auto items-center justify-between gap-10">
-        {/* Left video */}
-        <div className="video lg:w-[35vw] w-full flex items-center justify-center">
-          <video
-            autoPlay
-            muted
-            loop
-            className="object-cover w-full h-full rounded-2xl"
-            src="https://studio-size.com/wp-content/uploads/2024/06/size_clients_compressed.mp4"
-          ></video>
-        </div>
 
-        {/* Right text */}
-        <div className="text text-light flex flex-col lg:w-[49vw] w-full lg:px-10 px-5 justify-center">
-          <h1 className="lg:text-[1.6vw] md:text-[2vw] text-[2.1vw] font-semibold leading-tight">
-            Big multinational companies or small local brands. A partner approach
-            with one universal goal — to create <span className="text-accent">authentic</span>, functional, and beautiful design.
-          </h1>
-
-          <div className="mt-10 flex items-center">
-            {/* 
-            <button
-              className="lg:p-3 p-2 rounded-full border border-accent text-accent hover:bg-accent hover:text-light transition-all duration-300 ease-in-out hover:scale-110 shadow-md shadow-accent/30"
-            >
-              <i className="ri-arrow-right-line text-xl"></i>
-            </button> 
-            */}
-          </div>
+      <div className="marquee-container w-full overflow-hidden relative flex items-center h-[25vw]">
+        <div
+          ref={trackRef}
+          className="marquee-inner flex whitespace-nowrap"
+          style={{ width: "max-content" }}
+        >
+          {IMAGES.map((img, i) => (
+            <div key={i} className="w-[25vw] h-[25vw] mx-5 flex-shrink-0">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={400}
+                height={400}
+                className="object-contain w-full h-full"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default Page4;
+}

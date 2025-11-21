@@ -126,16 +126,25 @@ const Page6: React.FC = () => {
                     className="transition-transform duration-500 hover:scale-105 object-cover w-full h-full"
                   />
                 )}
-                {item.video && (
-                  <video
-                    id={`video-${index}`}
-                    className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-500 ease-in-out"
-                    muted
-                    loop
-                    autoPlay
-                    src={item.video}
-                  ></video>
-                )}
+                {item.isVimeo ? (
+  <iframe
+    src={item.video}
+    className="absolute top-0 left-0 w-full h-full z-0 object-cover"
+    allow="autoplay; fullscreen"
+    allowFullScreen
+  ></iframe>
+) : (
+  <video
+    id={`video-${index}`}
+    className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-500 ease-in-out"
+    muted
+    loop
+    autoPlay
+    playsInline
+    src={item.video}
+  ></video>
+)}
+
               </div>
             </div>
           ))}

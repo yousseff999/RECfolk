@@ -132,19 +132,12 @@ const Page3: React.FC = () => {
     <div className="page-3 bg-primary w-full lg:h-[52vw] h-[75vw] p-6 lg:p-14 font-[Satoshi] text-light">
       {/* Header Section */}
       <div className="text-content flex justify-between items-center w-full">
-        <h1 className="font-semibold text-xl lg:text-5xl md:text-3xl tracking-tight">
-          Featured <span className="text-accent">Work</span>
-        </h1>
+        <h1 className="font-montserrat font-semibold text-xl lg:text-5xl md:text-3xl tracking-tight">
+  Featured <span className="text-accent">Work</span>
+</h1>
 
         <div className="buttons flex items-center gap-3">
-          <Link href="/portfolio">
-            <button className="lg:p-2 lg:px-4 p-[1px] px-[9px] border-2 border-accent rounded-full text-light relative overflow-hidden group">
-              <span className="relative z-10 text-[12px] lg:text-lg">
-                View all
-              </span>
-              <span className="absolute inset-0 z-0 bg-transparent group-hover:bg-accent transition-colors duration-300 ease-in-out opacity-60" />
-            </button>
-          </Link>
+          <Link href="/portfolio"></Link>
 
           <button
             onClick={navigateLeft}
@@ -164,54 +157,70 @@ const Page3: React.FC = () => {
 
       {/* Gallery Section */}
       <div className="content lg:mt-10 mt-5 relative">
-        <div
-          ref={containerRef}
-          className="container flex gap-7 flex-nowrap overflow-auto overflow-y-hidden"
-          style={{ cursor: isDragging ? "grabbing" : "grab" }}
-        >
-          {mediaItems.map((item: MediaItem, index: number) => (
-            <div key={index} className="flex flex-col">
-              <div className="box w-[25vw] h-[31vw] bg-black rounded-[7px] relative overflow-hidden group flex-shrink-0">
-                {item.isVimeo ? (
-                  <div className="w-full h-full relative" style={{ paddingTop: "56.25%" }}>
-                    <iframe
-                      title={item.title}
-                      src={`${item.video}&autoplay=1&loop=1&muted=1&background=1`}
-                      className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      allowFullScreen
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <Image
-                      src={item.img}
-                      width={410}
-                      height={100}
-                      alt={item.title}
-                      className="transition-opacity duration-300 object-cover w-full h-full ease-in-out opacity-100 group-hover:opacity-0"
-                    />
-                    <video
-                      id={`video-${index}`}
-                      className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
-                      muted
-                      loop
-                      autoPlay
-                      src={item.video}
-                      onMouseEnter={(e) => handleVideoMouseEnter(e.currentTarget)}
-                      onMouseLeave={(e) => handleVideoMouseLeave(e.currentTarget)}
-                    />
-                  </>
-                )}
-                <div className="absolute bottom-0 left-0 w-full h-[4px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+        {/* Scroll Container with Blur Overlays */}
+        <div className="relative w-full overflow-hidden">
+          <div
+            ref={containerRef}
+            className="container flex gap-7 flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth"
+            style={{ cursor: isDragging ? "grabbing" : "grab" }}
+          >
+            {mediaItems.map((item: MediaItem, index: number) => (
+              <div key={index} className="flex flex-col">
+                <div
+                  className="box relative overflow-hidden group flex-shrink-0"
+                  style={{
+                    width: item.width || "25vw",
+                    height: item.height || "31vw",
+                    backgroundColor: "var(--primary-color)",
+                  }}
+                >
+                  {item.isVimeo ? (
+                    <div className="w-full h-full relative">
+                      <iframe
+                        title={item.title}
+                        src={`${item.video}&autoplay=1&loop=1&muted=1&background=1`}
+                        className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <Image
+                        src={item.img}
+                        width={410}
+                        height={100}
+                        alt={item.title}
+                        className="transition-opacity duration-300 object-cover w-full h-full ease-in-out opacity-100 group-hover:opacity-0"
+                      />
+                      <video
+                        id={`video-${index}`}
+                        className="absolute top-0 left-0 w-full h-full z-0 object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+                        muted
+                        loop
+                        autoPlay
+                        src={item.video}
+                        onMouseEnter={(e) => handleVideoMouseEnter(e.currentTarget)}
+                        onMouseLeave={(e) => handleVideoMouseLeave(e.currentTarget)}
+                      />
+                    </>
+                  )}
+                  <div className="absolute bottom-0 left-0 w-full h-[4px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </div>
+                <div className="mt-4">
+                  <h3 className="lg:text-2xl text-[15px] font-bold text-light">{item.title}</h3>
+                  <p className="lg:text-lg text-[10px] text-gray-400">{item.subtitle}</p>
+                </div>
               </div>
-              <div className="mt-4">
-                <h3 className="lg:text-2xl text-[15px] font-bold text-light">{item.title}</h3>
-                <p className="lg:text-lg text-[10px] text-gray-400">{item.subtitle}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Left Blur Overlay */}
+          <div className="absolute top-0 left-0 h-full w-60 pointer-events-none z-20 bg-gradient-to-r from-primary/100 to-primary/0" />
+
+          {/* Right Blur Overlay */}
+          <div className="absolute top-0 right-0 h-full w-60 pointer-events-none z-20 bg-gradient-to-l from-primary/100 to-primary/0" />
         </div>
 
         {/* Custom Cursor */}
