@@ -32,7 +32,7 @@ const NavItem: React.FC<NavItemProps> = ({
         width: "100%",
         duration: 0.3,
         ease: "power2.out",
-        backgroundColor: "#E50914",
+        backgroundColor: "#ff0000",
       });
 
     const handleMouseLeave = () =>
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
 
     if (isMenuOpen) {
       gsap.to(menuElement, { height: "100%", duration: 0.3, ease: "power2.inOut" });
-      gsap.to(hamburgerElement, { color: "#E50914", duration: 0.4 });
+      gsap.to(hamburgerElement, { color: "#ff0000", duration: 0.4 });
     } else {
       gsap.to(menuElement, { height: "0%", duration: 0.3, ease: "power2.out" });
       gsap.to(hamburgerElement, { color: "#F5F5F5", duration: 0.4 });
@@ -156,8 +156,8 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex nav-text text-light items-center justify-between gap-8 font-medium text-[1.2vw]">
             <NavItem index={0} onClick={() => handleNavClick("home")}>Home</NavItem>
             <NavItem index={1} onClick={() => handleNavClick("portfolio")}>Portfolio</NavItem>
-            <NavItem index={2} onClick={() => handleNavClick("studio")}>Studio</NavItem>
-            <NavItem index={3} onClick={() => handleNavClick("labs")}>Labs</NavItem>
+        {/* <NavItem index={2} onClick={() => handleNavClick("studio")}>Studio</NavItem>
+            <NavItem index={3} onClick={() => handleNavClick("labs")}>Labs</NavItem>  */}
             <NavItem index={4} onClick={() => handleNavClick("contact")}>Contact</NavItem>
           </div>
 

@@ -132,8 +132,8 @@ const Page3: React.FC = () => {
     <div className="page-3 bg-primary w-full lg:h-[52vw] h-[75vw] p-6 lg:p-14 font-[Satoshi] text-light">
       {/* Header Section */}
       <div className="text-content flex justify-between items-center w-full">
-        <h1 className="font-montserrat font-semibold text-xl lg:text-5xl md:text-3xl tracking-tight">
-  Featured <span className="text-accent">Work</span>
+       <h1 className="font-montserrat font-semibold text-xl lg:text-5xl md:text-3xl tracking-tight">
+  Featured <span style={{ color: "#ff0000" }}>Work</span>
 </h1>
 
         <div className="buttons flex items-center gap-3">

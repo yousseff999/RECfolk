@@ -23,7 +23,12 @@ export default function Backto() {
 
     const totalWidth = Array.from(track.children).reduce((acc, el: any) => {
       const style = getComputedStyle(el);
-      return acc + el.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+      return (
+        acc +
+        el.offsetWidth +
+        parseFloat(style.marginLeft) +
+        parseFloat(style.marginRight)
+      );
     }, 0) / 2; // half because we duplicated
 
     // Animate
@@ -41,12 +46,11 @@ export default function Backto() {
   return (
     <div className="main bg-primary w-full lg:h-[58vw] h-[75vw] lg:p-14 p-4 font-[Satoshi] flex flex-col">
       <div className="text-content-2 flex w-full mb-10">
-  <h1 className="text-light lg:text-[5.4vw] text-[4.5vw] font-syne font-bold leading-none tracking-tight">
-    Back to the <span className="text-accent">simple</span>, <br />
-    intuitive, and inspiring
-  </h1>
-</div>
-
+        <h1 className="text-light lg:text-[5.4vw] text-[4.5vw] font-syne font-bold leading-none tracking-tight">
+  Back to the simple, <br />
+  intuitive, and <span style={{ color: "#ff0000" }}>inspiring</span>
+</h1>
+      </div>
 
       <div className="marquee-container w-full overflow-hidden relative flex items-center h-[25vw]">
         <div
@@ -56,6 +60,7 @@ export default function Backto() {
         >
           {IMAGES.map((img, i) => (
             <div key={i} className="w-[25vw] h-[25vw] mx-5 flex-shrink-0">
+              {/* 
               <Image
                 src={img.src}
                 alt={img.alt}
@@ -63,6 +68,7 @@ export default function Backto() {
                 height={400}
                 className="object-contain w-full h-full"
               />
+              */}
             </div>
           ))}
         </div>

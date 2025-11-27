@@ -86,14 +86,8 @@ const Footer: React.FC = () => {
 
   const socialLinks: SocialLinkData[] = [
     { name: "Instagram", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Instagram.mp4" },
-    { name: "Behance", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Behance.mp4" },
-    { name: "Dribbble", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Dribbble.mp4" },
-    { name: "Vimeo", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Vimeo.mp4" },
-    { name: "Youtube", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Youtube.mp4" },
     { name: "LinkedIn", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Linkedin.mp4" },
-    { name: "Savee.it", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Saveeit.mp4" },
-    { name: "Fonts in Use", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Fonts-in-use.mp4" },
-    { name: "Pinterest", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Pinterest.mp4" },
+    { name: "WhatsApp", videoSrc: "https://studio-size.com/wp-content/uploads/2024/05/Pinterest.mp4" },
   ];
 
   return (

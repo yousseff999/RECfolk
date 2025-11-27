@@ -87,10 +87,10 @@ const ContactSection = () => {
         <div className="text-center md:text-right mt-4 md:mt-0">
           <p className="font-bold uppercase">For further inquiries</p>
           <a
-            href="mailto:recfolkteam@gmail.com"
+            href="mailto:Contact@recfolk.com"
             className="text-white hover:text-[#ff0000] transition-all duration-300"
           >
-            recfolkteam@gmail.com
+            Contact@recfolk.com
           </a>
         </div>
       </div>
